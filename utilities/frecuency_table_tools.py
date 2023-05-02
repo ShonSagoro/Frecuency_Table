@@ -4,9 +4,9 @@ from decimal import Decimal
 def get_range(data:list):
     return data[len(data)-1] - data[0]
 
-def get_klases(len:int):
-    print(f"klases: {1 + 3.322 * math.log(10,len)}")
-    return math.ceil(1 + 3.322 * math.log(10,len))
+def get_klases(len:int):    
+    print(f"klases: {1 + 3.322 * math.log(len,10)}")
+    return math.ceil(1 + 3.322 * math.log(len,10))
 
 def get_amplitude(r:int ,k:int):
     return math.ceil(r/k);

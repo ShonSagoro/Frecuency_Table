@@ -7,7 +7,7 @@ numeros = []
 
 with open(csv_file) as archivo_csv:
     lector_csv = csv.reader(archivo_csv, delimiter=',')
-    numeros=[int(numero) for numero in next(lector_csv)]
+    numeros=[float(numero) for numero in next(lector_csv)]
         
 
 print(f"number without sort {numeros}")

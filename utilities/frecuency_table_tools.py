@@ -27,7 +27,6 @@ def get_klases(len: int):
 
 
 def get_amplitude(r: int, k: int):
-    print(f"el valor da . decimal: {r % k == 0}")
     if r % k == 0:
         return (r / k) + 1
     len_digits = get_digits(r)

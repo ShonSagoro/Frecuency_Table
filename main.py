@@ -1,4 +1,5 @@
 from utilities import frecuency_table_tools as ftt
+import matplotlib.pyplot as plt
 import csv
 import os
 
@@ -33,3 +34,24 @@ frecuency_table=ftt.make_frecuency_table(numeros, klases, amplitude, variation_u
 print(f"Frecuency table: {frecuency_table}")
 
 ftt.print_frecuency_table(frecuency_table)
+
+media_arithmetic=ftt.get_arithmetic_media(frecuency_table, numeros)
+print(f"Media aritmetica: {media_arithmetic}")
+
+moda=ftt.get_moda(frecuency_table, amplitude)
+print(f"Moda: {moda}")
+
+media=ftt.get_mediana(frecuency_table, numeros, amplitude)
+print(f"Mediana: {media}")
+
+#Prueba de grafico
+valores_unicos = list(set(numeros))
+frecuencias = [numeros.count(valor) for valor in valores_unicos]
+
+plt.bar(valores_unicos, frecuencias)
+
+plt.title("Tabla de Frecuencias")
+plt.xlabel("Valores")
+plt.ylabel("Frecuencias")
+
+plt.show()

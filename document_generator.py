@@ -14,7 +14,7 @@ with open(csv_file) as archivo_csv:
 document=Document()
 
 def write_a_frecuency_table(data_table:list, document:Document):
-    table = document.add_table(rows=1, cols=9)
+    table = document.add_table(rows=1, cols=10)
     table.style = 'Table Grid'
     hdr_cells = table.rows[0].cells
     hdr_cells[0].text = 'Clase'
@@ -22,10 +22,11 @@ def write_a_frecuency_table(data_table:list, document:Document):
     hdr_cells[2].text = 'Lim. S'
     hdr_cells[3].text = 'MC'
     hdr_cells[4].text = 'Frec'
-    hdr_cells[5].text = 'Lim IE'
-    hdr_cells[6].text = 'Lim SE'
-    hdr_cells[7].text = 'Frec R'
-    hdr_cells[8].text = 'Frec R%'
+    hdr_cells[5].text = 'Frec AC'
+    hdr_cells[6].text = 'Lim IE'
+    hdr_cells[7].text = 'Lim SE'
+    hdr_cells[8].text = 'Frec R'
+    hdr_cells[9].text = 'Frec R%'
     for data in data_table:
         id=0
         row_cells = table.add_row().cells
@@ -81,6 +82,15 @@ frecuency_table=ftt.make_frecuency_table(data, klases, amplitude, variation_unit
 
 # Add Frecuency table
 write_a_frecuency_table(frecuency_table, document)
+
+media_arithmetic=ftt.get_arithmetic_media(frecuency_table, data)
+write_a_data(media_arithmetic, "Media Arithmetic","", document)
+
+moda=ftt.get_moda(frecuency_table, amplitude)
+write_a_data(moda, "Moda","", document)
+
+media=ftt.get_mediana(frecuency_table, data, amplitude)
+write_a_data(media, "Media","", document)
 
 write_a_data("ShonSagoro", "Made by","", document)
 

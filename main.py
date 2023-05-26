@@ -44,14 +44,25 @@ print(f"Moda: {moda}")
 media=ftt.get_mediana(frecuency_table, numeros, amplitude)
 print(f"Mediana: {media}")
 
-#Prueba de grafico
-valores_unicos = list(set(numeros))
-frecuencias = [numeros.count(valor) for valor in valores_unicos]
 
-plt.bar(valores_unicos, frecuencias)
+klases=[]
+frecuency=[]
 
+for element in frecuency_table:
+    klases.append(str(element[1])+"-"+str(element[2]))
+    frecuency.append(element[3])
+
+
+plt.bar(klases, frecuency)
 plt.title("Tabla de Frecuencias")
 plt.xlabel("Valores")
 plt.ylabel("Frecuencias")
+plt.show()
+
+plt.clf()
+
+
+plt.pie(frecuency, labels=klases)
+plt.title("Tabla de Frecuencias")
 
 plt.show()

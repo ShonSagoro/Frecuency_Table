@@ -1,6 +1,8 @@
 from docx import Document
-from docx.enum.text import WD_ALIGN_PARAGRAPH
+from docx.shared import Inches
 from utilities import frecuency_table_tools as ftt
+from docx.enum.text import WD_ALIGN_PARAGRAPH
+import matplotlib.pyplot as plt
 import csv
 import os
 
@@ -53,6 +55,12 @@ def write_a_data(data, type:str, operation:str, document:Document):
     prun= p.add_run(str(operation))
     prun= p.add_run(str(data))
 
+def add_image(imgName:str):
+    p = document.add_paragraph()
+    r = p.add_run()
+    r.add_picture('public/'+imgName+'.png',width=Inches(5.00))
+    last_element = document.paragraphs[-1]
+    last_element.alignment = WD_ALIGN_PARAGRAPH.CENTER
 
 # Table with the number without sort
 write_a_table("Not tidy.",data, document)
@@ -92,7 +100,32 @@ write_a_data(moda, "Moda","", document)
 media=ftt.get_mediana(frecuency_table, data, amplitude)
 write_a_data(media, "Media","", document)
 
-write_a_data("ShonSagoro", "Made by","", document)
+klases=[]
+frecuency=[]
+
+for element in frecuency_table:
+    klases.append(str(element[1])+"-"+str(element[2]))
+    frecuency.append(element[3])
+
+
+plt.bar(klases, frecuency)
+plt.title("Tabla de Frecuencias")
+plt.xlabel("Valores")
+plt.ylabel("Frecuencias")
+
+plt.savefig('public/frec_bar.png')
+add_image('frec_bar')
+plt.clf()
+
+
+plt.pie(frecuency, labels=klases)
+plt.title("Tabla de Frecuencias")
+
+plt.savefig('public/frec_pie.png')
+add_image('frec_pie')
+
+write_a_data("Baljeet, Rusty, ShonSagoro", "Made by","", document)
+
 
 document.save('public/frecuency_table.docx')
 print("Document gerenerated successfully.")
